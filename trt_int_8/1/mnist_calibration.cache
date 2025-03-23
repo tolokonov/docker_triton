@@ -1,0 +1,24 @@
+TRT-100800-EntropyCalibration2
+input: 50aef852
+/conv1/Conv_output_0: 5092e643
+/Tanh_output_0: 3a33e7d0
+/pool/Pad_output_0: 3a33e7d0
+/pool/AveragePool_output_0: 3a33e7d0
+/conv2/Conv_output_0: 3c0d3cdc
+/Tanh_1_output_0: 3a5d360a
+/pool_1/Pad_output_0: 3a5d360a
+/pool_1/AveragePool_output_0: 3a5d360a
+/conv3/Conv_output_0: 3c9c8b83
+/Tanh_2_output_0: 3bfe1bd8
+linear2.weight_output: 3ba69bcb
+/Tanh_3_output_0: 3c00eb9e
+/linear2/Gemm_output: 3dd540f2
+/linear1/Gemm_output_0: 3cf7cdb0
+output: 3dd5849e
+ONNXTRT_Broadcast_output: 3a880e6b
+ONNXTRT_Broadcast_3_output: 3aaea6bb
+linear2.bias_output: 3aaea6bb
+/Reshape_output_0: 3bfe1bd8
+linear1.weight_output: 3b0064da
+/linear1/Gemm_output: 3cfb56f3
+linear1.bias_output: 3a880e6b

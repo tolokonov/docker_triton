@@ -1,0 +1,51 @@
+version: '3.9'
+services:
+  preprocess:
+    build: .
+    container_name: preprocess
+    ports:
+      - "5000:5000"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+  triton:
+    image: nvcr.io/nvidia/tritonserver:25.01-py3
+    container_name: triton
+    ports:
+      - "8000:8000"  # REST API
+      - "8001:8001"  # gRPC API
+      - "8002:8002"  # Метрики
+    depends_on:
+      - prometheus
+    volumes:
+      - ./hw_model_mnist:/models
+    command: tritonserver --model-repository=/models
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+    restart: unless-stopped
+
+volumes:
+  grafana_data:
+

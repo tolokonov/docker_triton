@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s # Интервал, с которым будут запрашиваться метрики
+
+scrape_configs:
+  - job_name: 'preprocess-service'
+    static_configs:
+      - targets: ['preprocess:5000']
+  - job_name: 'triton-server'
+    static_configs:
+      - targets: ['triton:8002']
+
+  - job_name: 'prometheus'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['localhost:9090']
